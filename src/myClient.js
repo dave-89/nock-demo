@@ -1,16 +1,17 @@
 'use strict'
 
 import fetch from 'node-fetch'
+import isJSON from 'is-json'
 
 export default class MyClient {
-  simpleGET () {
+  simpleGET (url) {
     return new Promise((resolve, reject) => {
-      fetch('127.0.0.1:9999/simple/get')
-        .then(resp => resp.json())
-        .then(resp => {
+      fetch(url)
+        .then(resp => Promise.all([resp.status, resp.text()]))
+        .then(([status, body]) => {
           resolve({
-            first: resp.one,
-            second: resp.two
+            status: status,
+            body: isJSON(body) ? JSON.parse(body) : body
           })
         })
         .catch(err => {
