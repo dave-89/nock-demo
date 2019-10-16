@@ -1,0 +1,36 @@
+{
+  "name": "nock_demo",
+  "version": "1.0.0",
+  "description": "Demo for nock with node-fetch",
+  "main": "index.js",
+  "repository": "https://github.com/dave-89/nock-demo.git",
+  "author": "Davide Bianchini",
+  "license": "MIT",
+  "scripts": {
+    "lint": "./node_modules/eslint/bin/eslint.js --fix src/ test/",
+    "test": "./node_modules/mocha/bin/mocha  --require esm",
+    "dev": "nodemon --exec babel-node index.js"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "chai": "^4.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "esm": "^3.2.25",
+    "mocha": "^6.2.1",
+    "nock": "^11.4.0"
+  }
+}
