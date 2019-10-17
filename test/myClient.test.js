@@ -55,6 +55,9 @@ describe('myClient', () => {
         this.baseURL = 'https://www.this.doesn.exist.example.com'
         this.scope = nock(this.baseURL)
       })
+      after('clean nock', () => {
+        this.scope.isDone()
+      })
       it('non existing domain', (done) => {
         this.scope
           .get('/simple/get')
