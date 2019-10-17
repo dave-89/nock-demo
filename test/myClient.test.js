@@ -113,4 +113,41 @@ describe('myClient', () => {
       })
     })
   })
+  describe('post with form', () => {
+    describe('with nock', () => {
+      before('set up', () => {
+        this.baseURL = 'https://www.this.doesn.exist.example.com'
+        this.scope = nock(this.baseURL)
+        this.form = [
+          {
+            key: 'firstKey',
+            value: 'firstValue'
+          },
+          {
+            key: 'secondKey',
+            value: 'secondValue'
+          }
+        ]
+      })
+      after('tear down', () => {
+        this.scope.isDone()
+      })
+      it('200 OK', (done) => {
+        this.scope.post('/simple/post', {
+          firstKey: 'firstValue',
+          secondKey: 'secondValue'
+        })
+          .reply(200, {
+            someKey: 'someValue'
+          })
+        this.myClient.postWithForm(`${this.baseURL}/simple/post`, this.form)
+          .then(resp => {
+            expect(resp.status).to.be.equal(200)
+            expect(resp.body.someKey).to.be.equal('someValue')
+            done()
+          })
+          .catch(err => done(err))
+      })
+    })
+  })
 })
